@@ -61,19 +61,12 @@ def edit_user(user_id):
 
 @app.route('/user/<int:user_id>/update', methods=['POST'])
 def edit_update_user(user_id):
-    print('Accessing edit_update_user route')
     user = User.query.get(user_id)
 
     user.first_name = request.form['first_name_edit']
-    print(user.first_name)
     user.last_name = request.form['last_name_edit']
-    print(user.last_name)
     user.image_url = request.form['image_url_edit']
-    print(user.image_url)
     db.session.commit()
-    print(user.first_name)
-    print(user.last_name)
-    print(user.image_url)
 
     return render_template('info.html', user=user)
 
