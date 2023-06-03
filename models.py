@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
+import datetime
 
 
 db = SQLAlchemy()
@@ -8,9 +8,7 @@ def connect_db(app):
     db.app = app
     db.init_app(app)
 
-# class TimestampMixin(object):
-#     created = db.Column(
-#         db.DateTime, nullable=False, default=datetime.utcnow)
+
    
 class User(db.Model):
     """Individual user as a class"""
@@ -55,7 +53,18 @@ class Post(db.Model):
                       nullable = False)
     content = db.Column(db.String)
 
+    created_at = db.Column(
+        db.DateTime,
+        nullable=False,
+        default=datetime.datetime.now)
+
     username = db.Column(db.Text,
                          db.ForeignKey('users.username'))
     
     user = db.relationship('User', backref='posts')
+
+    @property
+    def friendly_date(self):
+        """Return nicer date."""
+
+        return self.created_at.strftime("%a %b %-d  %Y, %-I:%M %p")
