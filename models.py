@@ -35,7 +35,7 @@ class User(db.Model):
                          nullable = False)
     image_url = db.Column(db.String)
 
-    # posts = db.relationship("Post", backref="user", cascade="all, delete-orphan")
+    posts = db.relationship("Post", backref="user")
 
 
 class Post(db.Model):
@@ -63,7 +63,7 @@ class Post(db.Model):
     username = db.Column(db.Text,
                          db.ForeignKey('users.username'))
     
-    tags = db.relationship('Tag', secondary='post_tag', backref='posts')
+    tags = db.relationship("PostTag", backref='posts')
 
 
     @property
@@ -85,9 +85,8 @@ class Tag(db.Model):
                      unique = True)
     
     posts = db.relationship(
-        'Post',
-        secondary="post_tag",
-        backref="tags",)
+        'PostTag',
+        backref="tags")
     
 class PostTag(db.Model):
     """Connects the posts and the tags"""
