@@ -2,6 +2,7 @@
     {% block title %} {{user.first_name}} {{user.last_name}} {% endblock %}
 
 {% block content %}
+<div class="container">
     <h1 class="display-1">{{user.first_name}} {{user.last_name}}</h1>
     <h2 class="display4">Username: {{ user.username }}</h2>
     <img src="{{ user.image_url }}" alt="">
@@ -13,12 +14,13 @@
     <h2 class="display-2">Posts</h2>
     <ul>
         {% for post in user.posts %}
-            <li><a href="/user/{{ user.id }}/post/{{ post.id }}">{{ post.title }}</a></li>
+            <li><a href="/post/{{ post.id }}">{{ post.title }}</a></li>
         {% endfor %}
     </ul>
-    <a href="/user/{{ user.id }}/add_post">Create Post</a>
-    <a href="/">View All Posts</a>
-    <a href="/users">View All Users</a>
+    <a href="/user/{{ user.id }}/add_post" class="btn btn-info">Create Post</a>
+    <a href="/" class="btn btn-info">View All Posts</a>
+    <a href="/users" class="btn btn-info">View All Users</a>
     <hr>
-   >
+</div>
+   
     {% endblock %}

@@ -3,14 +3,34 @@
 {% block title %} Add Post {% endblock %}
 
 {% block content %}
-<form action="/user/{{ user.id }}/add_post" method="post">
+<div class="container">
+<form action="/user/{{ user.id }}/add_post" method="post"></form>
+<div class="form-group row">
     <label for="post_title">Title</label>
+    <div class="col-sm-10">
     <input type="text" name="post_title" placeholder="Title" required>
+    </div>
+</div>
+<div class="form-group row">
+    <div class="col-sm-10">
     <label for="post_body">Enter Post Here:</label>
+</div>
     <textarea name="post_body" id="" cols="30" rows="10"></textarea>
-    <button>Submit</button>
+</div>
+    <div class="form-check">
+        {% for tag in tags %}
+        <div>
+    <input class="form-check-input" type="checkbox" 
+    value='{{ tag.id }}' name="tags" 
+    id="{{ tag.id }}">
+    <label class='form-check-label' for="{{ tag.id }}">{{ tag.name }}</label> 
+</div>
+{% endfor %}
+</div>
+<a href="/user/{{ user.id }}" class="btn btn-info" >Cancel</a>
+    <button class="btn btn-success">Submit</button>
 
 </form>
-<a href="/user/{{ user.id }}">Cancel</a>
+</div>
 
 {% endblock %}

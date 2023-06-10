@@ -3,7 +3,7 @@
 {% block title %} Posts {% endblock %}
 
 {% block content %}
-
+<div class="container">
 <ul>
     {% for post in posts %}
 <li><a href="/post/{{ post.id }}"> {{ post.title }}</a>
@@ -11,5 +11,7 @@
     </li>
     {% endfor %}
 </ul>
-<a href="/users">View All Users</a>
+<a href="/tags" class="btn btn-info">View All Tags</a>
+<a href="/users" class="btn btn-info">View All Users</a>
+</div>
 {% endblock %}
